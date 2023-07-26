@@ -1,29 +1,26 @@
-import tkinter as tk
-import tkinter.messagebox as msg
+import rumps
 import subprocess
 
-class ToolbarApp:
-    def __init__(self, root):
-        self.root = root
-        toolbar = tk.Frame(root)
-        
-        about_btn = tk.Button(toolbar, text="ABOUT", command=self.show_about)
-        about_btn.pack(side="left")
-        
-        exit_btn = tk.Button(toolbar, text="EXIT", command=root.quit)
-        exit_btn.pack(side="left")
+class AwesomeStatusBarApp(rumps.App):
+    def __init__(self):
+        super(AwesomeStatusBarApp, self).__init__("Awesome App")
+        self.menu = ["ABOUT", "POTATO", "EXIT"]
 
-        potato_btn = tk.Button(toolbar, text="POTATO", command=self.run_command)
-        potato_btn.pack(side="left")
-        
-        toolbar.pack(side="top", fill="x")
+    @rumps.clicked("ABOUT")
+    def about(self, _):
+        rumps.alert('Hello, world!')
 
-    def show_about(self):
-        msg.showinfo("About", "Hello World")
-
-    def run_command(self):
+    @rumps.clicked("POTATO")
+    def potato(self, _):
         subprocess.run(["echo", "hihi"], shell=True)
 
-root = tk.Tk()
-app = ToolbarApp(root)
-root.mainloop()
+    @rumps.clicked("EXIT")
+    def exit(self, _):
+        rumps.quit_application()
+
+app = AwesomeStatusBarApp()
+app.run()
+This script creates an application that resides in the macOS status bar with the name "Awesome App" and has three menu items "ABOUT", "POTATO", and "EXIT". When "ABOUT"
+
+
+
